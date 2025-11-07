@@ -14,7 +14,7 @@ Admin UI and API for three jobs with Authentik: create invites, promote guests t
 - PWA: manifest and service worker endpoints.
 - CLI: same operations from the terminal.
 
-![Demo](demo-preview.png)
+![Demo](demo.png)
 
 ## Requirements
 

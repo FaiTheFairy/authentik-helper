@@ -1,6 +1,6 @@
 [project]
 name = "authentik-helper"
-version = "0.0.8"
+version = "0.1.0"
 description = "Admin WebUI wrapper for Authentik API (invites, membership, promotions)"
 readme = "README.md"
 requires-python = ">=3.11"
