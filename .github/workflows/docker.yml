@@ -37,7 +37,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             # main branch
-            type=raw,value=edge,enable=${{ startsWith(github.ref, 'refs/heads/main') }}
+            type=raw,value=dev,enable=${{ startsWith(github.ref, 'refs/heads/main') }}
             type=sha,enable=${{ startsWith(github.ref, 'refs/heads/main') }}
 
             # release tags
