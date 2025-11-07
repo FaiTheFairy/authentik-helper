@@ -38,7 +38,7 @@ uv run authentik-helper serve --factory --host 0.0.0.0 --port 8000
 # open http://127.0.0.1:8000
 ```
 
-`.env` example (adjust values):
+`.env` example:
 
 ```dotenv
 # Core
