@@ -57,6 +57,9 @@ jobs:
             org.opencontainers.image.licenses=MIT
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.url=${{ github.server_url }}/${{ github.repository }}
+          annotations: |
+            org.opencontainers.image.title=Authentik Helper
+            org.opencontainers.image.description=FastAPI helper for Authentik (invites, promotions, groups)
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -66,6 +69,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
           build-args: |
             BUILD_VERSION=${{ github.ref_name }}
             BUILD_COMMIT=${{ github.sha }}

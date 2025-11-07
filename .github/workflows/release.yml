@@ -82,17 +82,3 @@ jobs:
       - name: Compute build date
         id: now
         run: echo "date=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_OUTPUT
-
-      - name: Build and push release images
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          platforms: linux/amd64,linux/arm64
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ steps.bump.outputs.new_ver }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          build-args: |
-            BUILD_VERSION=v${{ steps.bump.outputs.new_ver }}
-            BUILD_COMMIT=${{ github.sha }}
-            BUILD_DATE=${{ steps.now.outputs.date }}
