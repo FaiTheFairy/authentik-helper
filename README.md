@@ -73,12 +73,19 @@ BRAND_LOGO=https://example.com/logo.png
 
 ## Quick start (Docker)
 
+Pull the published image from GitHub Container Registry and run it locally:
+
 ```bash
-docker build -t authentik-helper .
-docker run --rm -p 8000:8000 --env-file .env authentik-helper
+# pull latest (or replace 'latest' with a specific tag, e.g. 'v0.1.0')
+docker pull ghcr.io/faithefairy/authentik-helper:latest
+docker run --rm -p 8000:8000 --env-file .env ghcr.io/faithefairy/authentik-helper:latest
 ```
 
-Or use `docker-compose.yml.example`.
+Or use the provided `docker-compose.yml.example` (it already references the GHCR image):
+
+```bash
+docker compose -f docker-compose.yml.example up
+```
 
 ## Configuration
 

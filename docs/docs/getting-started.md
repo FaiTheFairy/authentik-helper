@@ -1,7 +1,9 @@
 <!-- docs/getting-started.md -->
+
 # Get started
 
 ## Create a limited Authentik account
+
 Use a service user with an API token. It does not log in interactively and only needs these permissions:
 
 - authentik_stages_invitation.add_invitation
@@ -30,19 +32,28 @@ Set the following variables (for dev, export or use a `.env`):
 uv sync --dev
 uv run authentik-helper serve --factory --host 127.0.0.1 --port 8000
 ```
+
 Now open http://127.0.0.1:8000.
 
 ## Run with Docker
 
+Pull the published image from GitHub Container Registry and run it locally:
+
 ```bash
-docker build -t authentik-helper .
-docker run --rm -p 8000:8000 --env-file .env authentik-helper
+# pull latest (or replace 'latest' with a specific tag, e.g. 'v0.1.0')
+docker pull ghcr.io/faithefairy/authentik-helper:latest
+docker run --rm -p 8000:8000 --env-file .env ghcr.io/faithefairy/authentik-helper:latest
 ```
-Or use `docker-compose.yml.example`.
+
+Or use the provided `docker-compose.yml.example` (it already references the GHCR image):
+
+```bash
+docker compose -f docker-compose.yml.example up
+```
 
 ## Reverse proxy and hosts
 
-- Set standard X-Forwarded-* headers. TLS should terminate at the proxy.
+- Set standard X-Forwarded-\* headers. TLS should terminate at the proxy.
 - `TrustedHostMiddleware` allows `localhost` and the host from `EXTERNAL_BASE_URL`.
 
 ## Health checks
