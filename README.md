@@ -14,6 +14,8 @@ Admin UI and API for three jobs with Authentik: create invites, promote guests t
 - PWA: manifest and service worker endpoints.
 - CLI: same operations from the terminal.
 
+<video src="demo.mp4" controls width="380"></video>
+
 ## Requirements
 
 - Python 3.11+ (recommend [uv](https://github.com/astral-sh/uv)) or Docker
