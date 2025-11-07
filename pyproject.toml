@@ -1,0 +1,59 @@
+[project]
+name = "authentik-helper"
+version = "0.0.7"
+description = "Admin WebUI wrapper for Authentik API (invites, membership, promotions)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "authlib>=1.6.3",
+    "fastapi>=0.116.1",
+    "httpx>=0.28.1",
+    "itsdangerous>=2.2.0",
+    "jinja2>=3.1.6",
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
+    "uvicorn>=0.35.0",
+]
+
+[dependency-groups]
+dev = [
+    "faker>=37.8.0",
+    "mkdocs-material>=9.6.20",
+    "pytest>=8.4.2",
+    "pytest-cov>=6.3.0",
+]
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+authentik-helper = "tools.cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["core", "services", "tools", "web", "routers"]
+
+[tool.setuptools_scm]
+# write a python module into package at build time
+version_scheme = "post-release"
+local_scheme = "no-local-version"
+write_to = "authentik_helper/_version.py"
+fallback_version = "0+unknown"
+
+# include static + templates inside the 'web' package
+[tool.setuptools.package-data]
+web = ["templates/**/*", "static/**/*"]
+
+[tool.pytest.ini_options]
+addopts = "-q --maxfail=1 --cov=./ --cov-report=term-missing --cov-fail-under=80"
+
+[tool.coverage.run]
+omit = [
+    "tests/*",
+    "*/tests/*",
+    "*/demo/*",
+    "build/*"
+]

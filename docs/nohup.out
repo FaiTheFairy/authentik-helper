@@ -1,0 +1,39 @@
+INFO    -  Building documentation...
+INFO    -  Cleaning site directory
+INFO    -  Documentation built in 0.26 seconds
+Traceback (most recent call last):
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/bin/mkdocs", line 10, in <module>
+    sys.exit(cli())
+             ~~~^^
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/lib/python3.13/site-packages/click/core.py", line 1442, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/lib/python3.13/site-packages/click/core.py", line 1363, in main
+    rv = self.invoke(ctx)
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/lib/python3.13/site-packages/click/core.py", line 1830, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/lib/python3.13/site-packages/click/core.py", line 1226, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/lib/python3.13/site-packages/click/core.py", line 794, in invoke
+    return callback(*args, **kwargs)
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/lib/python3.13/site-packages/mkdocs/__main__.py", line 272, in serve_command
+    serve.serve(**kwargs)
+    ~~~~~~~~~~~^^^^^^^^^^
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/lib/python3.13/site-packages/mkdocs/commands/serve.py", line 104, in serve
+    server.serve(open_in_browser=open_in_browser)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fai/faithefairy/scripts/authentik-helper/.venv/lib/python3.13/site-packages/mkdocs/livereload/__init__.py", line 173, in serve
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/wsgiref/simple_server.py", line 50, in server_bind
+    HTTPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/http/server.py", line 136, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 98] Address already in use

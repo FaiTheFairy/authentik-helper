@@ -1,0 +1,65 @@
+# mkdocs.yml
+site_name: Authentik Helper
+site_description: Admin WebUI wrapper for Authentik API (invites, membership, promotions)
+site_url: "https://faithefairy.github.io/authentik-helper"
+repo_url: https://github.com/faithefairy/authentik-helper
+edit_uri: edit/main/docs/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.tracking
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+        
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.magiclink
+
+plugins:
+  - search
+  # - mkdocstrings:
+  #     handlers:
+  #       python:
+  #         options:
+  #           docstring_style: google
+  #           show_source: false
+
+nav:
+  - Home: index.md
+  - Get started: getting-started.md
+  - Configuration: configuration.md
+  - Guides:
+      - Invites: guides/invites.md
+      - Membership: guides/membership.md
+  - CLI: cli.md
+  - HTTP API: api.md
+  - Emails: emails.md
+  - Development: development.md
+  - Security & Privacy: security-privacy.md
+  - Troubleshooting: troubleshooting.md
+  - FAQ: faq.md

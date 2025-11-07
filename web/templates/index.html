@@ -1,0 +1,136 @@
+{# web/templates/index.html #}
+{% extends "_base.html" %}
+
+{% block title %}Authentik Helper{% endblock %}
+{% block page_h1 %}Authentik Helper{% endblock %}
+
+{% block user_menu %}
+{% if user.picture %}
+<img src="{{ user.picture }}" alt="" class="avatar" width="30" height="30" decoding="async"
+  referrerpolicy="no-referrer">
+{% else %}
+<span class="avatar-fallback" aria-hidden="true">👤</span>
+{% endif %}
+<span class="user-label">{{ user.name or user.email }}</span>
+<a class="logout" href="/logout">Log Out</a>
+{% endblock %}
+
+{% block content %}
+<p class="page-intro small">
+  Authentik URL: <a href="{{ base_url }}">{{ base_url }}</a><br>
+  Homepage URL: <a href="{{ portal_url }}">{{ portal_url }}</a> (will be sent in the promotion email)
+</p>
+
+<fieldset>
+  <legend>Invitations</legend>
+  <div id="invite-status" class="small" role="status" aria-live="polite"></div>
+
+  <label for="inv-name">Name</label>
+  <input id="inv-name" placeholder="Display name" type="text" autocomplete="name" spellcheck="false">
+
+  <label for="inv-username">Username</label>
+  <input id="inv-username" placeholder="Username" type="text" autocomplete="username" spellcheck="false">
+
+  <label for="inv-email">Email</label>
+  <input id="inv-email" placeholder="user@example.com" type="email" autocomplete="email" inputmode="email">
+
+  <label class="small">
+    <input type="checkbox" class="checkbox" id="inv-single" checked> Single-Use
+  </label>
+
+  <label class="small" for="inv-days">Valid for How Many Days? (Optional Override)</label>
+  <input id="inv-days" type="number" min="1" placeholder="{{ invite_expires_days }}" inputmode="numeric">
+
+  <label class="small" for="inv-flow">Flow Slug (Optional Override)</label>
+  <input id="inv-flow" placeholder="{{ invite_flow or '' }}" type="text" spellcheck="false">
+
+  <button id="invite-btn" class="mt-2" type=button>Create Invitation</button>
+  <div id="invite-result" class="small mt-2" role="status" aria-live="polite"></div>
+</fieldset>
+
+<fieldset>
+  <legend id="guest-title"></legend>
+
+  <div class="controls-row small mt-1">
+    <input id="guest-filter" type="search" placeholder="Filter guests…" autocomplete="off" spellcheck="false">
+    <div class="bulk-row">
+      <button id="guest-promote-selected" class="is-hidden" type=button>Promote Selected</button>
+      <span class="small is-hidden" id="guest-selected-count">0 selected</span>
+    </div>
+  </div>
+
+  <div class="small mt-1">
+    <label class="small">
+      <input type="checkbox" class="checkbox" id="promo-mail" checked>
+      Send Promotion Email
+    </label>
+  </div>
+
+  <div id="guest-status" class="mt-2" role="status" aria-live="polite"></div>
+
+  <div class="table-wrapper">
+    <table id="guest-users" class="mt-2" aria-label="Guest Users">
+      <thead>
+        <tr>
+          <th scope="col" style="width:36px;">
+            <input type="checkbox" class="checkbox" id="guest-select-all" title="Select visible"
+              aria-label="Select visible">
+          </th>
+          <th scope="col">PK</th>
+          <th scope="col">USERNAME</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">ACTION</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="guest-pager" class="small mt-1"></div>
+</fieldset>
+
+<fieldset>
+  <legend id="members-title"></legend>
+
+  <div class="controls-row small mt-1">
+    <input id="members-filter" type="search" placeholder="Filter members…" autocomplete="off" spellcheck="false">
+    <div class="bulk-row">
+      <button id="members-demote-selected" type=button>Demote Selected</button>
+      <span class="small is-hidden" id="members-selected-count">0 selected</span>
+    </div>
+  </div>
+
+  <div id="members-status" class="mt-2" role="status" aria-live="polite"></div>
+
+  <div class="table-wrapper">
+    <table id="members-users" class="mt-2" aria-label="Members">
+      <thead>
+        <tr>
+          <th scope="col" style="width:36px;">
+            <input type="checkbox" class="checkbox" id="members-select-all" title="Select visible"
+              aria-label="Select visible">
+          </th>
+          <th scope="col">PK</th>
+          <th scope="col">USERNAME</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">ACTION</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="members-pager" class="small mt-1"></div>
+</fieldset>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/static/js/main.js?v=1"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js', {scope: '/'}).catch(console.error);
+    });
+  }
+</script>
+{% endblock %}

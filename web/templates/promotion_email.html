@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>You’ve been promoted</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+</head>
+
+<body style="margin:0;padding:0;background:#ffffff;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#ffffff;">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0"
+          style="width:100%;max-width:600px;border:1px solid #eee;border-radius:8px;overflow:hidden;">
+          <tr>
+            <td align="center" style="background:#44403B;padding:20px;">
+              {% if brand_logo %}
+              <img src="{{ brand_logo }}" alt="{{ org_name }}" width="200"
+                style="display:block;border:0;max-width:200px;height:auto;">
+              {% else %}
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:18px;color:#fff;font-weight:bold;">{{
+                org_name }}</div>
+              {% endif %}
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:24px 24px 8px 24px;font-family:Arial,Helvetica,sans-serif;color:#111111;">
+              <h1 style="margin:0 0 8px 0;font-size:22px;line-height:1.3;">Welcome aboard, {{ name }}</h1>
+              <p style="margin:0;font-size:16px;line-height:1.6;">
+                You’ve been promoted to become a member. You now have access to the services provided by {{ org_name }}.
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding:20px 24px 8px 24px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td align="center" bgcolor="#111111" style="border-radius:6px;">
+                    <a href="{{ portal_url }}" target="_blank"
+                      style="font-family:Arial,Helvetica,sans-serif;display:inline-block;padding:12px 18px;color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;line-height:1;">open
+                      the portal</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:12px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#555;">tip:
+                Bookmark the portal for quick access.</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:16px 24px 8px 24px;font-family:Arial,Helvetica,sans-serif;color:#111111;">
+              <p style="margin:0 0 8px 0;font-size:14px;line-height:1.6;">If the button doesn’t work, copy and paste
+                this link in your browser:</p>
+              <p style="margin:0;word-break:break-all;font-size:14px;line-height:1.6;color:#2b6cb0;">{{ portal_url }}
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:16px 24px 8px 24px;font-family:Arial,Helvetica,sans-serif;color:#111111;">
+              <p style="margin:0 0 12px 0;font-size:13px;color:#555;">If you weren’t expecting this, reply and i’ll take
+                a look.</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center"
+              style="background:#f7f7f7;padding:16px 24px;font-family:Arial,Helvetica,sans-serif;color:#666;font-size:12px;">
+              {{ footer }}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>

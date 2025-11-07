@@ -1,0 +1,91 @@
+{# web/templates/_base.html #}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Authentik Helper{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="/static/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/icon-192.png" sizes="192x192">
+  <link rel="manifest" href="/static/manifest.webmanifest">
+
+  <meta name="theme-color" content="#111827" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta id="theme-color" name="theme-color" content="#111827">
+
+  <script>
+    (function () {
+      try {
+        const k = 'theme-preference';
+        const s = localStorage.getItem(k);
+        const prefers = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', (s === 'dark' || s === 'light') ? s : prefers);
+      } catch { }
+    }());
+  </script>
+
+  <link rel="stylesheet" href="/static/app.css?v=11">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="site-left">
+      {% if brand_logo %}
+      <img src="{{ brand_logo }}" alt="Logo" class="brand-logo" width="96" height="24" decoding="async"
+        referrerpolicy="no-referrer">
+      {% endif %}
+      <strong class="org-name">{{ org_name or 'Authentik Helper' }}</strong>
+    </div>
+    <div class="site-right">
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="auto" aria-live="polite">
+        <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+          <mask class="moon" id="moon-mask">
+            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+            <circle cx="24" cy="10" r="6" fill="black" />
+          </mask>
+          <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor" />
+          <g class="sun-beams" stroke="currentColor">
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </g>
+        </svg>
+      </button>
+      {% block user_menu %}{% endblock %}
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">{% block page_h1 %}Authentik Helper{% endblock %}</h1>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% if request.url.path != '/login' %}
+  <footer class="site-footer container" role="contentinfo" aria-label="Build info">
+    <small>
+      {% if repo_url and app_version %}
+      <a href="{{ repo_url }}/releases/tag/v{{ app_version }}" rel="noopener">v{{ app_version }}</a>
+      {% else %}
+      v{{ app_version }}
+      {% endif %}
+      {% if repo_url and app_commit and app_commit_short %} •
+      <a href="{{ repo_url }}/commit/{{ app_commit }}" rel="noopener">{{ app_commit_short }}</a>
+      {% elif app_commit_short %} ({{ app_commit_short }})
+      {% endif %}
+      {% if app_build_date %} • built {{ app_build_date }}{% endif %}
+    </small>
+  </footer>
+  {% endif %}
+
+  <script src="/static/js/theme-toggle.js" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>
