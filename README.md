@@ -6,7 +6,7 @@ Admin UI and API for three jobs with Authentik: create invites, promote guests t
 
 ## Features
 
-- Invitations: create single-use links with name/username/email, expiry days; uses your Authentik invite flow.
+- Invitations: create single-use links with name/username/email and expiry; the helper passes these fields to Authentik so invite flows can pre-fill registration fields.
 - Membership: promote/demote users individually or in bulk, with optional promotion email.
 - Emails: branded HTML invitation and promotion emails via SMTP (Jinja templates).
 - Login: OIDC login (Authlib). Set `DISABLE_AUTH=true` for local testing only.
@@ -136,6 +136,10 @@ All HTML (site pages and emails) lives under `web/templates/`. You can modify th
 ## FAQ
 
 - What happens if I demote myself? You will likely lose access to apps restricted to Members. This can lock you out of Authentik-Helper and, depending on your Authentik setup, its homepage. Use caution.
+
+## Acknowledgements
+
+- Prefilled invitation fields behavior inspired by stiw47: https://github.com/goauthentik/authentik/discussions/13305#discussioncomment-13094337
 
 ## License
 
