@@ -1,7 +1,5 @@
 # Authentik Helper
 
-TEST3
-
 Documentation: https://faithefairy.github.io/authentik-helper
 
 Admin UI and API for three jobs with Authentik: create invites, promote guests to members, and demote members to guests. It wraps Authentik’s API with a focused workflow, HTML emails, and a small CLI.
