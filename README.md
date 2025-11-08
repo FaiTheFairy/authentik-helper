@@ -90,7 +90,7 @@ docker compose -f docker-compose.yml.example up
 ## Configuration
 
 - Full list of required/optional settings and how branding is merged: see `docs/docs/configuration.md`.
-- Health check: `GET /healthz` → `{ "ok": true }`.
+- Health check: `GET /healthz` -> `{ "ok": true }`.
 - Secure cookies are enabled automatically when `EXTERNAL_BASE_URL` starts with `https://`.
 
 ## CLI
