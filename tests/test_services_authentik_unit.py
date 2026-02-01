@@ -151,3 +151,43 @@ def test_create_invitation(monkeypatch):
         flow_slug="invite-via-email", email="a@example.test", name="A", username="A"
     )
     assert "invite_url" in out and out["invite_url"].startswith("https://")
+
+
+def test_create_invitation_uses_slug(monkeypatch):
+    import httpx
+    import services.authentik as svc
+
+    recorded = {}
+
+    class FakeResp:
+        def __init__(self, status_code=201, json_data=None, text=None):
+            self.status_code = status_code
+            self._json = {} if json_data is None else json_data
+            self.text = json.dumps(self._json) if text is None else text
+
+        def json(self):
+            return self._json
+
+    class RecordingClient:
+        def __init__(self):
+            self.headers = {}
+
+        def get(self, url, params=None):
+            return FakeResp(status_code=200, json_data={})
+
+        def post(self, url, json=None):
+            recorded['url'] = url
+            recorded['json'] = json or {}
+            return FakeResp(status_code=201, json_data={"pk": "abc123", "expires": "2030-01-01T00:00:00Z"})
+
+    monkeypatch.setattr(httpx, "Client", lambda *a, **k: RecordingClient(), raising=True)
+
+    svc.ak._session = None
+
+    out = svc.ak.create_invitation(
+        flow_slug="invite-via-email", email="john@example.test", name="John Smith", username="jsmith"
+    )
+
+    assert recorded.get('json', {}).get('name') == 'john-smith'
+    assert recorded.get('json', {}).get('fixed_data', {}).get('name') == 'John Smith'
+    assert "invite_url" in out and out["invite_url"].startswith("https://")

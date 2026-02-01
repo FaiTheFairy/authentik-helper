@@ -8,6 +8,7 @@ from typing import Any, Dict, List, Optional
 import httpx
 
 from tools.settings import settings
+from core.utils import slugify_name
 
 
 class AuthentikClient:
@@ -142,8 +143,12 @@ class AuthentikClient:
     ) -> Dict[str, Any]:
         days = settings.AK_INVITE_EXPIRES_DAYS if expires_days is None else int(expires_days)
         expires_iso = self._iso_utc_in(days)
+        # determine a slug for the Authentik invitation name (resource name)
+        slug = slugify_name(name) if name else ""
+        if not slug:
+            slug = f"invite-{uuid.uuid4().hex[:8]}"
         payload: Dict[str, Any] = {
-            "name": name or f"invite-{uuid.uuid4().hex[:8]}",
+            "name": slug,
             "single_use": bool(single_use),
             "expires": expires_iso,
             "fixed_data": {"name": name, "username": username, "email": email},
