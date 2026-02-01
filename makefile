@@ -4,13 +4,13 @@ SHELL := /bin/bash
 IS_DRY := $(findstring n,$(MAKEFLAGS))
 
 #  basics (override via env or cli) 
-IMAGE      ?= ghcr.io/FaiTheFairy/authentik-helper
+IMAGE      ?= ghcr.io/faithefairy/authentik-helper
 PKG_VER  := $(shell python3 -c "import tomllib,sys; d=tomllib.load(open('pyproject.toml','rb')); print(d['project']['version'])" 2>/dev/null || echo 0.0.0)
 VER ?= v$(PKG_VER)
 PLATFORMS  ?= linux/amd64,linux/arm64
 BUILDER    ?= multi
 GIT_REMOTE ?= origin
-REPO_URL   ?= https://github.com/FaiTheFairy/authentik-helper
+REPO_URL   ?= https://github.com/faithefairy/authentik-helper
 
 # build metadata (used as --build-arg and OCI labels)
 BUILD_VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo 0unknown)
